@@ -6,43 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ETCH-A-SKETCH</title>
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-    <div><button id="reset" onclick="reset()">RESET</button></div>
+    <button id="reset" onclick="reset()">RESET</button>
 
     <div id="container">
 
     </div>
-
-
-    <script>
-        const container = document.getElementById("container");
-
-        function makeRows(rows, cols) {
-            container.style.setProperty('--grid-rows', rows);
-            container.style.setProperty('--grid-cols', cols);
-            for (c = 0; c < (rows * cols); c++) {
-                let cell = document.createElement("div");
-                cell.addEventListener("mouseover", colorShift);
-                cell.classList.add("grid-item", "pixel")
-                container.appendChild(cell);
-            };
-        };
-
-        function colorShift() {
-            event.target.style.backgroundColor = "blue";
-        }
-
-        function reset() {
-            let pixels = document.querySelectorAll('.pixel')
-            pixels.forEach(pixel => {
-                pixel.style.backgroundColor = ""
-            });
-        }
-        makeRows(16, 16);
-    </script>
+    <script src="index.js"></script>
 </body>
 
 </html>
