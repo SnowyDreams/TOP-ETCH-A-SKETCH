@@ -13,6 +13,14 @@
     grid-template-columns: repeat(var(--grid-cols), 0.5fr);
 }
 
+#reset{
+    display: block;
+    margin: 15px auto;
+    height: 30px;
+    width: 65px;
+    background-color: aqua;
+}
+
 .grid-item {
     border: 1px solid #ddd;
     text-align: center;

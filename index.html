@@ -9,6 +9,9 @@
 </head>
 
 <body>
+
+    <div><button id="reset" onclick="reset()">RESET</button></div>
+
     <div id="container">
 
     </div>
@@ -23,14 +26,21 @@
             for (c = 0; c < (rows * cols); c++) {
                 let cell = document.createElement("div");
                 cell.addEventListener("mouseover", colorShift);
-                container.appendChild(cell).className = "grid-item";
+                cell.classList.add("grid-item", "pixel")
+                container.appendChild(cell);
             };
         };
 
         function colorShift() {
-            event.target.style.backgroundColor= "blue";
+            event.target.style.backgroundColor = "blue";
         }
 
+        function reset() {
+            let pixels = document.querySelectorAll('.pixel')
+            pixels.forEach(pixel => {
+                pixel.style.backgroundColor = ""
+            });
+        }
         makeRows(16, 16);
     </script>
 </body>
