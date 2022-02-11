@@ -1,4 +1,6 @@
 const container = document.getElementById("container");
+const saturation = 100,
+    lightness = 10;
 
 function makeRows(rows, cols) {
     container.innerHTML = "";
@@ -8,18 +10,26 @@ function makeRows(rows, cols) {
         let cell = document.createElement("div");
         cell.addEventListener("mouseover", colorShift);
         cell.classList.add("grid-item", "pixel")
+        cell.dataset.pass = 0;
+        cell.dataset.hue = "";
         container.appendChild(cell);
     };
 };
 
-function colorShift() {
-    event.target.style.backgroundColor = "blue";
+function colorShift(event) {
+    let data = event.target.dataset;
+    if (data.hue == "") {
+        data.hue = Math.floor(Math.random() * 255);
+    }
+
+    data.pass = parseInt(data.pass) + 1;
+    event.target.style.backgroundColor = `hsl(${data.hue},${saturation}%,${100-(lightness*data.pass)}%)`;
 }
 
 function reset() {
-    let pixels = document.querySelectorAll('.pixel')
+    let pixels = document.querySelectorAll('.pixel');
     pixels.forEach(pixel => {
-        pixel.style.backgroundColor = ""
+        pixel.style.backgroundColor = "";
     });
 
     let userSize = prompt("What size would you like?", "20X20").split(/\D+/);
@@ -34,7 +44,7 @@ function reset() {
             reset();
         }
     });
-    userSize.length != 1 ?  makeRows(userSize[0], userSize[1]) : makeRows(userSize[0],userSize[0]);
+    userSize.length != 1 ? makeRows(userSize[0], userSize[1]) : makeRows(userSize[0], userSize[0]);
 
 }
 makeRows(20, 20);
